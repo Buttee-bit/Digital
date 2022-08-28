@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+<script>
+    { % block jquery %
+    }
+    var endpoint = '/api/data/' // {% url "api-data" %}
+    var data_Django = "{{context}}"
+    console.loq(data_Django)
+    $.ajax({
+        method: "GET",
+        url: endpoint,
+        success: function(parsed) {
+            console.loq(parsed)
+        },
+        error: function(error_data) {
+            console.loq('error')
+            console.loq(error_data)
+        }
+    }) { % endblock %
+    }
+</script>
+
+{% block content %}
+
+<div class="row">
+    <div class="col-sm-12" url-endpoint='{% url "api-data" %}'>
+        <h1>Hello World</h1>
+    </div>
+</div>
+
+{% endblock content %}

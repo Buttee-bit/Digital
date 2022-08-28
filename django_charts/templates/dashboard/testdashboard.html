@@ -1,0 +1,38 @@
+<html>
+
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <div class="col-md-6">
+        <div class="container col-md-6">
+            <canvas id="myChart" ></canvas>
+        </div>
+    </div>
+</body>
+
+</html>
+<script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // Тип графика
+        type: 'line',
+
+        // Создание графиков
+        data: {
+            // Точки графиков
+            labels: {{listkeys | safe}},
+            // График
+            datasets: [{
+                label: 'Мой первый график на Chart.js', // Название
+                backgroundColor: 'rgb(255, 99, 132)', // Цвет закраски
+                borderColor: 'rgb(255, 99, 132)', // Цвет линии
+                data: {{listvalues | safe}}, // Данные каждой точки графика
+            }]
+        },
+
+        // Настройки графиков
+        options: {
+            responsive: true
+        }
+    });
+</script>
