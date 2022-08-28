@@ -156,8 +156,8 @@ def readfile(filename):
         predict_df_1  = pd.DataFrame(Ypredict, columns=['target'])
         submission = pd.concat([df_docx['text'], predict_df_1], axis=1)
 
-        return dict_,submission
-    dict_,Ypredict = tfidf_text(texts_stemm)
+        return dict_,submission,Ypredict
+    dict_,submission,Ypredict = tfidf_text(texts_stemm)
 
     def get_info_class_loss(Ypredict):
         class_ = [str(i) for i in range(1,41)]
@@ -169,7 +169,6 @@ def readfile(filename):
         answer = sorted(list_class)
         answer.append('non')
         return answer
-    classes_in_doc = get_info_class_loss(Ypredict)
 
     def freq_class(Ypredict):
         cnt = Counter(Ypredict)
@@ -207,7 +206,7 @@ def readfile(filename):
         document.save(path)
     path_to_doc = 'answer\\'+'predict_model'+name
     print(path_to_doc)
-    get_docx(Ypredict, dict_class_color_otv, path_to_doc)
+    get_docx(submission, dict_class_color_otv, path_to_doc)
 def results(request):
     context = {
         'freq_': freq_,
